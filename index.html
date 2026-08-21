@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a1728" />
+    <meta
+      name="description"
+      content="A fictional, browser-based UPS maintenance-bypass training simulator. Training simulation only—not an operating procedure."
+    />
+    <title>FWP-002 | UPS Training Simulator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#simulator">Skip to simulator</a>
+
+    <header class="topbar">
+      <div class="brand-lockup">
+        <span class="project-mark" aria-hidden="true">02</span>
+        <div>
+          <p class="eyebrow">Fun Weekend Project</p>
+          <h1>UPS Training Simulator</h1>
+        </div>
+      </div>
+      <div class="simulation-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Simulation only
+      </div>
+    </header>
+
+    <main id="simulator" class="app-shell" aria-describedby="global-warning">
+      <p id="global-warning" class="global-warning">
+        Fictional training environment — not an operating procedure and never a substitute for an approved MOP or OEM documentation.
+      </p>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow accent">Scenario preview · Draft 0.1</p>
+          <h2 id="hero-title">Follow the power. Verify the state.</h2>
+          <p>
+            Explore how a fictional UPS load path changes between operating modes. Switching actions remain locked until the scenario is reviewed and approved.
+          </p>
+        </div>
+        <div class="readiness-card" aria-label="Scenario readiness">
+          <span>Scenario readiness</span>
+          <strong>Design review</strong>
+          <div class="progress-track" aria-hidden="true"><span></span></div>
+          <small>Procedure logic pending SME approval</small>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Interactive training workspace">
+        <aside class="mode-panel" aria-labelledby="mode-heading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Concept explorer</p>
+              <h3 id="mode-heading">Operating state</h3>
+            </div>
+            <span class="step-count">3 states</span>
+          </div>
+
+          <div class="mode-list" role="list">
+            <button class="mode-card active" type="button" data-mode="normal" aria-pressed="true">
+              <span class="mode-index">01</span>
+              <span><strong>Normal inverter</strong><small>Conditioned UPS path</small></span>
+            </button>
+            <button class="mode-card" type="button" data-mode="static" aria-pressed="false">
+              <span class="mode-index">02</span>
+              <span><strong>Static bypass</strong><small>Internal bypass path</small></span>
+            </button>
+            <button class="mode-card" type="button" data-mode="maintenance" aria-pressed="false">
+              <span class="mode-index">03</span>
+              <span><strong>Maintenance bypass</strong><small>External direct path</small></span>
+            </button>
+          </div>
+
+          <div class="locked-action" aria-label="Procedure controls unavailable">
+            <span aria-hidden="true">◆</span>
+            <div><strong>Procedure controls locked</strong><small>Awaiting documented SME approval</small></div>
+          </div>
+        </aside>
+
+        <section class="diagram-card" aria-labelledby="diagram-heading">
+          <div class="section-heading diagram-heading">
+            <div>
+              <p class="eyebrow">Fictional single-line</p>
+              <h3 id="diagram-heading">Power path visualization</h3>
+            </div>
+            <div class="path-key" aria-label="Diagram legend">
+              <span><i class="key-line energized"></i>Energized</span>
+              <span><i class="key-line standby"></i>Available</span>
+            </div>
+          </div>
+
+          <div class="diagram" data-current-mode="normal">
+            <div class="source equipment">
+              <span class="equipment-type">Source</span>
+              <strong>Utility</strong>
+              <small>Fictional supply</small>
+            </div>
+
+            <div class="path path-input" aria-hidden="true"></div>
+
+            <div class="ups equipment">
+              <span class="equipment-type">UPS</span>
+              <strong id="ups-mode-label">Inverter online</strong>
+              <div class="ups-blocks" aria-hidden="true">
+                <span>REC</span><b>›</b><span>INV</span>
+              </div>
+            </div>
+
+            <div class="path path-output" aria-hidden="true"></div>
+            <div class="breaker breaker-output"><span>UOB</span><strong id="uob-state">Closed</strong></div>
+            <div class="path path-load" aria-hidden="true"></div>
+
+            <div class="load equipment">
+              <span class="equipment-type">Output</span>
+              <strong>Critical load</strong>
+              <small id="load-source">Supplied by inverter</small>
+            </div>
+
+            <div class="path path-static" aria-hidden="true"></div>
+            <div class="static-label">Internal static bypass</div>
+
+            <div class="path path-maintenance" aria-hidden="true"></div>
+            <div class="breaker breaker-mbp"><span>MBP</span><strong id="mbp-state">Open</strong></div>
+            <div class="maintenance-label">External maintenance path</div>
+          </div>
+
+          <div class="state-summary" aria-live="polite">
+            <span class="summary-icon" aria-hidden="true">N</span>
+            <div>
+              <p class="eyebrow">Current concept</p>
+              <h4 id="summary-title">Normal inverter operation</h4>
+              <p id="summary-copy">The fictional load is shown on the conditioned inverter path.</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="status-panel" aria-labelledby="status-heading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Live indicators</p>
+              <h3 id="status-heading">System status</h3>
+            </div>
+          </div>
+
+          <dl class="status-list">
+            <div><dt>Load</dt><dd><span class="status-dot good"></span>Energized</dd></div>
+            <div><dt>UPS mode</dt><dd id="status-ups">Inverter</dd></div>
+            <div><dt>UOB</dt><dd id="status-uob">Closed</dd></div>
+            <div><dt>MBP</dt><dd id="status-mbp">Open</dd></div>
+            <div><dt>Protection</dt><dd id="status-protection">UPS supported</dd></div>
+          </dl>
+
+          <div class="coach-note">
+            <p class="eyebrow">Coach note</p>
+            <p id="coach-copy">Start by identifying the active load path—not by choosing a switching action.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>FWP-002 · Fun Weekend Projects</span>
+      <span>Draft training concept · No field authorization</span>
+    </footer>
+
+    <div class="safety-gate" id="safety-gate" role="dialog" aria-modal="true" aria-labelledby="safety-title">
+      <div class="safety-dialog">
+        <span class="safety-symbol" aria-hidden="true">!</span>
+        <p class="eyebrow accent">Before you begin</p>
+        <h2 id="safety-title">This is a fictional training simulation.</h2>
+        <p>
+          It is not an operating procedure and must never be used to operate, isolate, energize, or service real equipment.
+        </p>
+        <label class="acknowledgement">
+          <input type="checkbox" id="safety-check" />
+          <span>I understand that approved site procedures, OEM documentation, and qualified direction always govern real work.</span>
+        </label>
+        <button type="button" id="enter-simulator" disabled>Enter concept explorer</button>
+        <a href="SAFETY.md">Read the complete safety boundary</a>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
