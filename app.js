@@ -1,87 +1,9 @@
-const modes = {
-  normal: {
-    label: "Inverter online",
-    uob: "Closed",
-    mbp: "Open",
-    source: "Supplied by inverter",
-    title: "Normal inverter operation",
-    copy: "The fictional load is shown on the conditioned inverter path.",
-    icon: "N",
-    statusMode: "Inverter",
-    protection: "UPS supported",
-    coach: "Start by identifying the active load path—not by choosing a switching action.",
-  },
-  static: {
-    label: "Static bypass",
-    uob: "Closed",
-    mbp: "Open",
-    source: "Supplied by static bypass",
-    title: "Internal static bypass",
-    copy: "The fictional internal bypass path is carrying the load while the external path remains open.",
-    icon: "S",
-    statusMode: "Static bypass",
-    protection: "Reduced",
-    coach: "A mode request is not proof of a load path. Training logic will require a separate verified indication.",
-  },
-  maintenance: {
-    label: "Not carrying load",
-    uob: "Open",
-    mbp: "Closed",
-    source: "Supplied by external path",
-    title: "External maintenance bypass",
-    copy: "The fictional load is shown on a direct external path. Normal UPS protection is unavailable in this concept state.",
-    icon: "M",
-    statusMode: "Not carrying load",
-    protection: "Not UPS supported",
-    coach: "Maintenance bypass changes the protection available to the load. It is not simply another normal operating mode.",
-  },
-};
-
-const safetyGate = document.querySelector("#safety-gate");
-const safetyCheck = document.querySelector("#safety-check");
-const enterButton = document.querySelector("#enter-simulator");
-const modeButtons = [...document.querySelectorAll(".mode-card")];
-const diagram = document.querySelector(".diagram");
-
-safetyCheck.addEventListener("change", () => {
-  enterButton.disabled = !safetyCheck.checked;
-});
-
-enterButton.addEventListener("click", () => {
-  safetyGate.classList.add("hidden");
-  document.querySelector(".mode-card").focus();
-});
-
-function setText(selector, value) {
-  document.querySelector(selector).textContent = value;
-}
-
-function selectMode(modeName) {
-  const mode = modes[modeName];
-  if (!mode) return;
-
-  diagram.dataset.currentMode = modeName;
-  modeButtons.forEach((button) => {
-    const selected = button.dataset.mode === modeName;
-    button.classList.toggle("active", selected);
-    button.setAttribute("aria-pressed", String(selected));
-  });
-
-  setText("#ups-mode-label", mode.label);
-  setText("#uob-state", mode.uob);
-  setText("#mbp-state", mode.mbp);
-  setText("#load-source", mode.source);
-  setText("#summary-title", mode.title);
-  setText("#summary-copy", mode.copy);
-  setText(".summary-icon", mode.icon);
-  setText("#status-ups", mode.statusMode);
-  setText("#status-uob", mode.uob);
-  setText("#status-mbp", mode.mbp);
-  setText("#status-protection", mode.protection);
-  setText("#coach-copy", mode.coach);
-}
-
-modeButtons.forEach((button) => {
-  button.addEventListener("click", () => selectMode(button.dataset.mode));
-});
+const modes={normal:{source:"Supplied by inverter",path:"Inverter",bypass:"Available",detail:"Conditioned fictional UPS path displayed"},static:{source:"Supplied by internal bypass",path:"Internal bypass",bypass:"Carrying load",detail:"Internal bypass concept view selected"},maintenance:{source:"Supplied by external path",path:"External path",bypass:"Direct path",detail:"External maintenance concept view selected"}};
+const safetyGate=document.querySelector("#safety-gate"),safetyCheck=document.querySelector("#safety-check"),enterButton=document.querySelector("#enter-simulator"),modeButtons=[...document.querySelectorAll("[data-mode]")],diagram=document.querySelector(".one-line"),viewedModes=new Set(["normal"]);let tourIndex=0;
+const timeNow=()=>new Intl.DateTimeFormat([],{hour:"2-digit",minute:"2-digit",second:"2-digit"}).format(new Date());
+function addEvent(event,details){const row=document.createElement("div");row.className="event-row";[timeNow(),event,details].forEach(value=>{const cell=document.createElement("span");cell.textContent=value;row.appendChild(cell)});document.querySelector("#event-rows").prepend(row)}
+function updateProgress(){const count=viewedModes.size;document.querySelector("#progress-copy").textContent=`${count} / 3 states viewed`;document.querySelector("#progress-fill").style.width=`${count/3*100}%`}
+function selectMode(name,log=true){const mode=modes[name];if(!mode)return;diagram.dataset.currentMode=name;modeButtons.forEach(button=>{const active=button.dataset.mode===name;button.classList.toggle("active",active);button.setAttribute("aria-pressed",String(active))});document.querySelector("#load-source").textContent=mode.source;document.querySelector("#status-path").textContent=mode.path;document.querySelector("#status-bypass").textContent=mode.bypass;viewedModes.add(name);updateProgress();if(log)addEvent("Concept state changed",mode.detail)}
+safetyCheck.addEventListener("change",()=>{enterButton.disabled=!safetyCheck.checked});enterButton.addEventListener("click",()=>{safetyGate.classList.add("hidden");modeButtons[0].focus();addEvent("Simulator initialized","Non-procedural concept explorer started")});modeButtons.forEach(button=>button.addEventListener("click",()=>selectMode(button.dataset.mode)));
+document.querySelector("#start-tour").addEventListener("click",()=>{const order=["normal","static","maintenance"];selectMode(order[tourIndex]);tourIndex=(tourIndex+1)%order.length});document.querySelector("#reset-tour").addEventListener("click",()=>{viewedModes.clear();viewedModes.add("normal");tourIndex=0;selectMode("normal",false);document.querySelector("#event-rows").replaceChildren();addEvent("Explorer reset","Returned to the initial fictional state")});document.querySelector("#clear-log").addEventListener("click",()=>document.querySelector("#event-rows").replaceChildren());updateProgress();
 
