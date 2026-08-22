@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06101b">
+  <meta name="description" content="A fictional browser-based UPS training simulator. Simulation only—not an operating procedure.">
+  <title>FWP-002 | UPS Maintenance Bypass Simulator</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#simulator">Skip to simulator</a>
+<header class="app-header">
+  <button class="icon-button menu-button" type="button" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  <div class="shield-mark" aria-hidden="true">⚡</div>
+  <div class="title-lockup"><h1>UPS Maintenance Bypass Simulator</h1><p>Training mode</p></div>
+  <div class="header-actions"><button class="header-button" type="button">☷ Scenarios</button><button class="icon-button" type="button" aria-label="Help">?</button><button class="icon-button" type="button" aria-label="Settings">⚙</button></div>
+</header>
+<p class="safety-strip" id="global-warning">Fictional training environment · Not an operating procedure · Approved site documentation always governs real work</p>
+<main id="simulator" class="sim-grid" aria-describedby="global-warning">
+  <section class="panel breaker-panel" aria-labelledby="breaker-heading">
+    <div class="panel-title"><h2 id="breaker-heading">Concept controls</h2><span class="lock-pill">Preview only</span></div>
+    <div class="control-grid">
+      <button class="control-card active" type="button" data-mode="normal" aria-pressed="true"><span class="control-name">Input path A</span><span class="control-status"><i></i>Available</span><span class="switch-visual on" aria-hidden="true"><b></b><em>I</em><small>O</small></span></button>
+      <button class="control-card" type="button" data-mode="static" aria-pressed="false"><span class="control-name">Internal bypass</span><span class="control-status"><i></i>Available</span><span class="switch-visual on" aria-hidden="true"><b></b><em>I</em><small>O</small></span></button>
+      <button class="control-card" type="button" data-mode="maintenance" aria-pressed="false"><span class="control-name">External path</span><span class="control-status"><i></i>Standby</span><span class="switch-visual" aria-hidden="true"><b></b><em>I</em><small>O</small></span></button>
+      <div class="control-card locked-control"><span class="control-name">Inverter control</span><span class="control-status warning"><i></i>Locked</span><span class="push-buttons" aria-hidden="true"><b></b><b></b></span></div>
+      <div class="control-card locked-control"><span class="control-name">Energy storage</span><span class="control-status"><i></i>Connected</span><span class="switch-visual on" aria-hidden="true"><b></b><em>I</em><small>O</small></span></div>
+      <div class="control-card locked-control"><span class="control-name">Load output</span><span class="control-status"><i></i>Energized</span><span class="switch-visual on" aria-hidden="true"><b></b><em>I</em><small>O</small></span></div>
+    </div>
+    <p class="panel-note"><span>◆</span> These controls select conceptual views only. They do not represent an approved switching procedure.</p>
+  </section>
+  <section class="panel diagram-panel" aria-labelledby="diagram-heading">
+    <div class="panel-title"><h2 id="diagram-heading">UPS one-line diagram</h2><div class="legend"><span><i class="live"></i>Energized</span><span><i></i>Available</span></div></div>
+    <div class="one-line" data-current-mode="normal" aria-label="Fictional UPS power path diagram">
+      <div class="diagram-label bypass-supply">Bypass supply</div><div class="diagram-label rectifier-supply">Rectifier supply</div><div class="diagram-label maintenance-path-label">External maintenance path</div><div class="diagram-label static-path-label">Internal static bypass</div>
+      <div class="wire bypass-feed"></div><div class="node bypass-node"></div><div class="wire rectifier-feed"></div><div class="node rectifier-node"></div>
+      <div class="wire maintenance-top"></div><div class="wire maintenance-drop-left"></div><div class="wire maintenance-drop-right"></div><div class="wire ups-feed"></div><div class="wire ups-output"></div><div class="wire load-feed"></div><div class="wire static-feed"></div><div class="wire static-drop"></div>
+      <div class="breaker-symbol breaker-bypass"><i></i><span>Input B</span></div><div class="breaker-symbol breaker-rectifier"><i></i><span>Input A</span></div><div class="breaker-symbol breaker-maintenance"><i></i><span>External path</span></div><div class="breaker-symbol breaker-output"><i></i><span>Output</span></div>
+      <div class="ups-boundary"><span>UPS</span></div>
+      <div class="conversion-block rectifier-block"><span>Rectifier</span><b>AC</b><i></i><em>DC</em></div><div class="conversion-block inverter-block"><span>Inverter</span><b>DC</b><i></i><em>AC</em></div>
+      <div class="static-block"><span>Static bypass</span><b>↦</b></div><div class="battery"><span></span><span></span><span></span><b>Energy storage</b></div>
+      <div class="load-box"><span>Critical load</span><small id="load-source">Supplied by inverter</small></div>
+    </div>
+  </section>
+  <aside class="right-rail">
+    <section class="panel learning-panel" aria-labelledby="learning-heading"><div class="panel-title"><h2 id="learning-heading">Learning checkpoints</h2></div><ol class="checkpoint-list">
+      <li class="active"><span>1</span><div><strong>Identify the source</strong><small>Locate available paths</small></div></li><li><span>2</span><div><strong>Trace the load path</strong><small>Follow energized conductors</small></div></li><li><span>3</span><div><strong>Compare protection</strong><small>Observe what changes by state</small></div></li><li><span>4</span><div><strong>Review indications</strong><small>Separate command from proof</small></div></li><li><span>5</span><div><strong>Explore each state</strong><small>No switching sequence provided</small></div></li><li><span>6</span><div><strong>Complete the recap</strong><small>Procedure remains SME-locked</small></div></li>
+    </ol></section>
+    <section class="panel objective-panel"><div class="panel-title"><h2>Training objective</h2></div><p>Recognize the active fictional load path and understand how available protection changes between operating states.</p><div class="progress-label"><span>Progress</span><strong id="progress-copy">1 / 3 states viewed</strong></div><div class="progress-bar"><span id="progress-fill"></span></div></section>
+  </aside>
+  <section class="panel status-panel" aria-labelledby="status-heading"><div class="panel-title"><h2 id="status-heading">System status</h2></div><div class="status-grid">
+    <article><span class="status-icon">⌁</span><div><small>Load path</small><strong id="status-path">Inverter</strong></div></article><article><span class="status-icon">◇</span><div><small>Bypass</small><strong id="status-bypass">Available</strong></div></article><article><span class="status-icon">▣</span><div><small>Energy storage</small><strong>Connected</strong></div></article><article><span class="status-icon alarm">!</span><div><small>Alarm status</small><strong>No active alarms</strong></div></article>
+  </div></section>
+  <section class="panel event-panel" aria-labelledby="event-heading"><div class="panel-title"><h2 id="event-heading">Event log</h2><button id="clear-log" type="button">Clear</button></div><div class="event-table" role="log" aria-live="polite"><div class="event-row header"><span>Time</span><span>Event</span><span>Details</span></div><div id="event-rows"></div></div></section>
+  <section class="panel sim-controls" aria-labelledby="controls-heading"><div class="panel-title"><h2 id="controls-heading">Simulation controls</h2></div><button class="primary-action" id="start-tour" type="button">▶ Start concept tour</button><button id="reset-tour" type="button">↻ Reset explorer</button><button class="disabled-action" type="button" disabled>△ Procedure mode locked</button></section>
+</main>
+<div class="safety-gate" id="safety-gate" role="dialog" aria-modal="true" aria-labelledby="safety-title"><div class="safety-dialog"><span class="safety-symbol">!</span><p class="kicker">Before you begin</p><h2 id="safety-title">This is a fictional training simulation.</h2><p>It is not an operating procedure and must never be used to operate, isolate, energize, or service real equipment.</p><label class="acknowledgement"><input type="checkbox" id="safety-check"><span>I understand that approved site procedures, OEM documentation, and qualified direction always govern real work.</span></label><button type="button" id="enter-simulator" disabled>Enter concept explorer</button><a href="SAFETY.md">Read the complete safety boundary</a></div></div>
+<script src="app.js"></script>
+</body></html>
+

@@ -14,7 +14,8 @@ This is **Fun Weekend Project 002 (FWP-002)**. The repository will be documented
 - [x] Record initial requirements
 - [ ] Validate the simulated operating sequence with an approved subject-matter expert
 - [ ] Design the UPS state machine and one-line diagram
-- [ ] Build the first playable scenario
+- [x] Build a responsive, non-procedural concept explorer
+- [ ] Build the first approved playable scenario
 - [ ] Add automated and scenario-based testing
 - [ ] Package a reviewed training release
 
@@ -64,7 +65,9 @@ FWP-002-ups-maintenance-bypass-simulator/
 
 ## Running the project
 
-There is no playable build yet. The first implementation milestone will establish a small browser application that can run locally without access to external services.
+Open `index.html` in a modern browser to use the current concept explorer. The static application requires no backend service and is designed for both touch devices and desktop browsers.
+
+The concept explorer visualizes fictional operating states but does not provide a switching sequence. Procedure controls remain locked pending SME approval.
 
 ## Validation and release policy
 
